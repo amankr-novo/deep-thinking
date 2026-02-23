@@ -1,80 +1,106 @@
-# Deep Thinking
+# deep-thinking
 
-## Overview
+A Claude Code skill that provides a comprehensive deep reasoning framework for systematic, thorough thinking on complex tasks — automatically applied for multi-step problems, ambiguous requirements, architectural decisions, and debugging sessions.
 
-This skill provides a comprehensive deep reasoning framework that guides systematic, thorough thinking for complex tasks. It automatically applies for multi-step problems, ambiguous requirements, architectural decisions, debugging sessions, and any task requiring careful analysis beyond surface-level responses.
+Inspired by [Claude God Mode](https://jaglab.org/claude-god-mode/).
 
-Inspired by [Claude God Mode](https://jaglab.org/claude-god-mode/), this protocol ensures responses stem from genuine understanding and careful reasoning rather than superficial analysis.
+## Installation
 
-## When to Apply
+Add this to your Claude Code project settings (`.claude/settings.json`) or user settings:
 
-Activate this protocol when:
-- The task has **multiple valid approaches** with meaningful trade-offs
-- Requirements are **ambiguous** or underspecified
-- The problem involves **architectural or design decisions**
-- Debugging requires **systematic investigation**
-- The task touches **multiple systems or files**
-- Stakes are high (data integrity, security, production impact)
-- The user explicitly asks to think carefully or deeply
+```json
+{
+  "skills": [
+    "github:amankr-novo/deep-thinking"
+  ]
+}
+```
 
-Skip for trivial, single-step tasks with obvious solutions.
+Or install from the CLI:
 
-## Core Thinking Sequence
+```bash
+claude skill add github:amankr-novo/deep-thinking
+```
 
-### 1. Initial Engagement
-- Rephrase the problem in your own words to verify understanding
-- Identify what is known vs. unknown
-- Consider the broader context — why is this question being asked? What's the underlying goal?
-- Map out what knowledge or codebase areas are needed to address this
-- Flag ambiguities that need clarification before proceeding
+## Prerequisites
 
-### 2. Problem Decomposition
-- Break the task into core components
-- Identify explicit and implicit requirements
-- Map constraints and limitations
-- Define what a successful outcome looks like
+- None. This skill works automatically with any Claude Code session — no external tools, APIs, or configuration required.
 
-### 3. Multiple Hypotheses
-- Generate at least 2-3 possible approaches before committing
-- **Keep multiple working hypotheses active** — don't collapse to one prematurely
-- Consider unconventional or non-obvious interpretations
-- **Look for creative combinations** of different approaches
-- Evaluate trade-offs: complexity, performance, maintainability, risk
-- Show why certain approaches are more suitable than others
+## Usage
 
-### 4. Natural Discovery Flow
-Think like a detective — each realization should lead naturally to the next:
-- Start with obvious aspects, then dig deeper
-- Notice patterns and connections across the codebase
-- Question initial assumptions as understanding develops
-- Circle back to earlier ideas with new context
-- Build progressively deeper insights
-- **Be open to serendipitous insights** — unexpected connections often reveal the best solutions
-- Follow interesting tangents, but tie them back to the core issue
+This skill activates **automatically** based on task complexity. No slash command is needed.
 
-### 5. Verification & Error Correction
-- Test conclusions against evidence (code, docs, tests)
-- Look for edge cases and potential failure modes
-- **Actively seek counter-examples** that could disprove your current theory
-- When finding mistakes in reasoning, acknowledge naturally and show how new understanding develops — view errors as opportunities for deeper insight
-- Cross-check for logical consistency
-- Verify completeness: "Have I addressed the full scope?"
+### When It Activates
 
-### 6. Knowledge Synthesis
-- Connect findings into a coherent picture
-- Identify key principles or patterns that emerged
-- **Create useful abstractions** — turn findings into reusable concepts or guidelines
-- Note important implications and downstream effects
-- Ensure the synthesis answers the original question
+| Trigger | Example |
+|---|---|
+| Multiple valid approaches with trade-offs | "Should I use Redis or in-memory caching?" |
+| Ambiguous or underspecified requirements | "Make the app faster" |
+| Architectural or design decisions | "Add real-time updates to the dashboard" |
+| Systematic debugging | "Users are seeing intermittent 500 errors" |
+| Changes touching multiple systems or files | "Refactor the authentication system" |
+| High-stakes changes (data, security, production) | "Migrate the database schema" |
+| Explicit request | "Think deeply about this", "Analyze carefully" |
 
-### 7. Recursive Application
-- Apply the same careful analysis at both **macro** (system/architecture) and **micro** (function/logic) levels
-- Use patterns recognized at one scale to inform analysis at another
-- Maintain consistency while allowing for scale-appropriate methods
-- Show how detailed analysis supports or challenges broader conclusions
+### When It Skips
 
-## Additional Resources
+Trivial, single-step tasks with obvious solutions — typo fixes, simple renames, one-line changes.
 
-For extended guidance, examples, and domain-specific applications, see:
-- [SKILL.md](deep-thinking/SKILL.md) - Complete skill definition and protocol details
-- [reference.md](deep-thinking/reference.md) - Reference guide with thinking patterns and examples
+## Thinking Phases
+
+| Phase | What it does |
+|---|---|
+| **Initial Engagement** | Rephrases the problem, identifies knowns vs. unknowns, maps required knowledge areas, flags ambiguities. |
+| **Problem Decomposition** | Breaks the task into components, identifies explicit and implicit requirements, defines success criteria. |
+| **Multiple Hypotheses** | Generates 2-3+ approaches before committing. Evaluates trade-offs across complexity, performance, maintainability, and risk. |
+| **Natural Discovery** | Follows leads like a detective — starts with the obvious, digs deeper, questions assumptions, circles back with new context. |
+| **Verification** | Tests conclusions against evidence, seeks counter-examples, checks for edge cases and logical consistency. |
+| **Knowledge Synthesis** | Connects findings into a coherent picture, extracts reusable principles, notes downstream effects. |
+| **Recursive Application** | Applies the same analysis at both macro (architecture) and micro (function) levels. |
+
+## Adaptive Depth
+
+The skill scales analysis depth based on the situation:
+
+| Factor | Shallow | Deep |
+|---|---|---|
+| **Complexity** | Simple lookup | Multi-dimensional problem |
+| **Stakes** | Low-risk formatting | Production database migration |
+| **Time sensitivity** | Quick fix needed now | Long-term architecture decision |
+| **Information** | Complete spec | Vague description |
+| **Scope** | One file change | Cross-module refactor |
+
+## Anti-Patterns
+
+| Anti-Pattern | Instead Do |
+|---|---|
+| Jumping to implementation immediately | Analyze the problem space first |
+| Considering only one approach | Generate and compare alternatives |
+| Ignoring edge cases | Actively seek boundary conditions |
+| Assuming without verifying | Read the code, check the docs |
+| Over-engineering simple tasks | Match depth to complexity |
+| Analysis paralysis on trivial decisions | Set a time-box, then decide |
+| Drawing premature conclusions | Verify with evidence before committing |
+| Not seeking counter-examples | Actively look for cases that disprove your theory |
+| Mechanical checklist thinking | Let reasoning flow organically |
+
+## Verification Checklist
+
+Before delivering a response, the protocol verifies:
+
+- All aspects of the original question are addressed
+- Conclusions are supported by evidence (not assumptions)
+- Edge cases and failure modes are considered
+- Trade-offs are explicitly stated
+- The recommended approach is justified over alternatives
+- No logical inconsistencies in the reasoning
+- Detail level matches the user's expertise and needs
+
+## Repo Structure
+
+```
+deep-thinking/
+  deep-thinking/
+    SKILL.md              # Skill definition (protocol, phases, quality metrics)
+    reference.md          # Reference guide (thinking patterns, domain examples)
+```
